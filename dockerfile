@@ -1,11 +1,9 @@
-# Use a base image
-FROM nginx:alpine
+FROM openjdk:11-jre-slim
 
-# Copy static website files to the nginx HTML directory
-COPY index.html /usr/share/nginx/html/index.html
+WORKDIR /app
 
-# Expose port 80
-EXPOSE 80
+COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
 
-# Start the nginx server
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 8080
+
+CMD ["java", "-jar", "app.jar"]
